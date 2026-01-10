@@ -8,10 +8,11 @@ interface Project {
   description: string
   longDescription: string
   technologies: string[]
-  type: "Full Stack" | "Frontend" | "Backend" | "Learning Project"
+  type: "Full Stack" | "Frontend" | "Backend" | "Learning Project" | "CMS Development"
   status: "Completed" | "In Progress" | "Planned"
   imageUrl: string
   liveUrl?: string
+  liveUrl2?: string
   githubUrl?: string
   learnings: string[]
 }
@@ -20,108 +21,119 @@ const projects: Project[] = [
   {
     id: 1,
     title: "Personal Portfolio Website",
-    description: "A modern, responsive portfolio to showcase skills and projects.",
+    description: "A modern, responsive portfolio designed to showcase skills, projects, and personal growth as a web developer.",
     longDescription:
-      "Built this portfolio website from scratch using HTML5, CSS3, and JavaScript. Features smooth scrolling, responsive design, and auto-scroll technology showcase. Demonstrates understanding of semantic HTML, CSS Grid/Flexbox, and vanilla JavaScript interactions.",
-    technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+      "This portfolio website was built using React and Next.js, focusing on clean component structure, reusable UI elements, and performance-oriented rendering. It features smooth scrolling interactions, responsive layouts across devices, and an auto-scrolling technology showcase. The project demonstrates an understanding of component-based architecture, modern styling practices, and client-side interactions within a Next.js environment, with attention to maintainability and scalability.",
+    technologies: ["React", "Next.js", "JavaScript", "TypeScript"],
     type: "Full Stack",
     status: "Completed",
-    imageUrl: "/placeholder.svg?height=300&width=500",
-    liveUrl: "#",
-    githubUrl: "https://github.com/AbiSulfur",
+    imageUrl: "/Porto1.png",
+    liveUrl: "https://abigail-dev.vercel.app/",
+    githubUrl: "https://github.com/AbiSulfur/Portofolio",
     learnings: [
-      "Semantic HTML structure",
-      "CSS Grid and Flexbox layouts",
-      "Smooth scroll behavior",
-      "Mobile-first responsive design",
-    ],
+      "Component-based architecture with React",
+      "Building reusable and maintainable UI components",
+      "Client-side interactions and smooth scrolling in Next.js",
+      "Responsive layouts and modern styling practices",
+    ],    
   },
   {
     id: 2,
-    title: "E-Commerce Product Catalog",
-    description: "Laravel-based product management system with filtering and search.",
+    title: "Leafly Tea",
+    description: "Leafly Tea is an e-commerce website developed to showcase and sell products from the Leafly Tea brand.",
     longDescription:
-      "A full-stack e-commerce application built with Laravel framework. Implements MVC architecture, routing, Blade templating, and CRUD operations for products. Features dynamic product filtering, search functionality, and basic user authentication.",
-    technologies: ["Laravel", "PHP", "MySQL", "Blade Template"],
+      "The website is built using PHP, HTML, CSS, and JavaScript, with MySQL as the database for managing product data. It implements core e-commerce features such as product listing, basic data management, and dynamic interactions on the frontend. For visual styling and layout, the project utilizes Bootstrap, while AOS (Animate On Scroll) is used to enhance user experience through subtle animations and smooth visual transitions. This project demonstrates an understanding of fundamental web development concepts, frontend–backend integration, and building visually engaging websites using commonly adopted web technologies.",
+    technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Bootstrap"],
     type: "Full Stack",
     status: "Completed",
-    imageUrl: "/placeholder.svg?height=300&width=500",
-    githubUrl: "https://github.com/AbiSulfur",
+    imageUrl: "/Porto2.png",
+    liveUrl: "https://budiluhurdigital.com/project/10RPL/LeaflyTea/",
+    githubUrl: "https://github.com/AbiSulfur/Leafly",
     learnings: [
-      "Laravel MVC architecture",
-      "Database design with MySQL",
-      "Blade templating engine",
-      "Basic CRUD operations",
-      "Form validation",
-    ],
+      "Building an e-commerce website using PHP and MySQL",
+      "Integrating frontend and backend logic",
+      "Managing product data with a relational database",
+      "Responsive layout and styling with Bootstrap",
+      "Enhancing user experience with AOS animations",
+    ],    
   },
   {
     id: 3,
-    title: "Task Management Dashboard",
-    description: "Interactive todo app with local storage and task categorization.",
+    title: "Focusly",
+    description: "Modern landing page for a productivity application.",
     longDescription:
-      "A practical JavaScript project that demonstrates DOM manipulation and event handling. Users can create, edit, delete, and categorize tasks. Features persistent data storage using browser localStorage and a clean, intuitive interface.",
-    technologies: ["JavaScript", "HTML5", "CSS3", "LocalStorage"],
+      "A responsive web design project showcasing a clean UI for a Pomodoro and habit-tracking app. Features scroll-triggered animations using Intersection Observer, interactive 3D product mockups, and a mobile-first layout built with pure HTML, CSS, and JavaScript.",
+    technologies: ["JavaScript", "HTML5", "CSS3",],
     type: "Frontend",
     status: "Completed",
-    imageUrl: "/placeholder.svg?height=300&width=500",
-    githubUrl: "https://github.com/AbiSulfur",
+    imageUrl: "/Porto3.png",
+    githubUrl: "https://github.com/AbiSulfur/Focusly",
     learnings: [
-      "DOM manipulation",
-      "Event listeners and handlers",
-      "LocalStorage API",
-      "Functional programming concepts",
-      "User interface design principles",
+      "Intersection Observer API",
+      "CSS Grid & Flexbox layouts",
+      "Mobile-first responsive design",
+      "CSS Animations & 3D Transforms",
+      "Touch events & Haptic Feedback",
     ],
   },
   {
     id: 4,
-    title: "WordPress Business Website",
-    description: "Custom WordPress site built with Elementor for a local business.",
+    title: "Web-Based Teacher Activity Application",
+    description: "Teacher Activity Management System built with PHP and MySQL for managing and reporting school activities.",
     longDescription:
-      "Designed and built a professional business website using WordPress and Elementor page builder. Implemented custom CSS for branding, optimized for SEO, and configured essential plugins. This project demonstrates practical experience with WordPress ecosystem and no-code/low-code tools.",
-    technologies: ["WordPress", "Elementor", "PHP", "CSS", "SEO"],
-    type: "Frontend",
-    status: "Completed",
-    imageUrl: "/placeholder.svg?height=300&width=500",
+      "Designed and developed a web-based system to manage teacher activities with role-based access control (admin, teacher, student). Features include activity tracking and reporting, teacher and class management, data filtering, and export to Excel and PDF. Built with Bootstrap 5 for modern UI, Chart.js for data visualization, and FPDF for document generation. This project showcases hands-on experience in full-stack web development, database design, and admin dashboard implementation.",
+    technologies: ["PHP", "MySQL", "Bootstrap 5", "Chart.js", "FPDF", "JavaScript",],      
+    type: "Full Stack",
+    status: "In Progress",
+    imageUrl: "/Porto4.png",
+    githubUrl: "https://github.com/AbiSulfur/Aplikasi-Kegiatan-Guru",
     learnings: [
-      "WordPress theming and customization",
-      "Elementor page building",
-      "Custom CSS in WordPress",
-      "Plugin management",
-      "SEO optimization basics",
-    ],
+      "PHP backend development",
+      "MySQL database design and relationships",
+      "Role-based access control (RBAC)",
+      "CRUD operations and data validation",
+      "Admin dashboard and data visualization",
+      "Exporting data to PDF and Excel",
+      "Responsive UI with Bootstrap 5",
+    ],    
   },
   {
     id: 5,
-    title: "Weather App API Integration",
-    description: "JavaScript app fetching real-time data from weather API.",
+    title: "Stockwise - Smart Inventory System",
+    description: "Modern SaaS landing page for an inventory & order management platform.",
     longDescription:
-      "A practical project demonstrating REST API integration with JavaScript. The app fetches real-time weather data, displays it dynamically, and includes error handling. Built to understand asynchronous programming, fetch API, and data manipulation.",
-    technologies: ["JavaScript", "REST API", "Fetch API", "JSON"],
+      "A fully responsive landing page designed for 'Stockwise', a smart inventory management solution. It features a clean, professional SaaS aesthetic with a hero section showcasing a dashboard mockup, a statistical impact grid, an interactive 3-step guide, and optimized CTA sections. Built with a mobile-first approach using Tailwind CSS for rapid, consistent styling.",
+    technologies: ["HTML5", "Tailwind CSS", "JavaScript",],
     type: "Frontend",
     status: "Completed",
-    imageUrl: "/placeholder.svg?height=300&width=500",
-    githubUrl: "https://github.com/AbiSulfur",
-    learnings: ["Fetch API and promises", "Asynchronous programming", "Error handling", "JSON parsing", "DOM updates"],
+    imageUrl: "/Porto5.png",
+    githubUrl: "https://github.com/AbiSulfur/Stockwise",
+    learnings: [
+      "Tailwind CSS utility classes",
+      "SaaS UI/UX design patterns",
+      "Responsive Grid & Flexbox layouts",
+      "Visual hierarchy optimization",
+      "Semantic HTML structure"
+    ],
   },
   {
     id: 6,
-    title: "Blog Platform with Comments",
-    description: "Full-stack Laravel blog with user authentication and comments.",
+    title: "Budi Luhur School Website",
+    description: "Official education portal built with WordPress and Ciuss theme.",
     longDescription:
-      "A complete blogging platform built with Laravel. Features include user registration/login, post creation/editing, comment system, and basic admin functionality. Demonstrates understanding of relational databases, authentication, and user roles.",
-    technologies: ["Laravel", "PHP", "MySQL", "Authentication", "Relations"],
-    type: "Full Stack",
+      "A comprehensive official website network for Budi Luhur Schools (SMK, SD, KB/TK). Built on the WordPress CMS to ensure easy content management for administrators. The site utilizes a specialized education theme from Ciuss.com, customized to feature a dynamic news portal, academic curriculum details, student galleries, and admission (PPDB) information integration.",
+    technologies: ["WordPress", "PHP", "CSS", "MySQL"],
+    type: "CMS Development",
     status: "In Progress",
-    imageUrl: "/placeholder.svg?height=300&width=500",
-    githubUrl: "https://github.com/AbiSulfur",
+    imageUrl: "/Porto6.png", 
+    liveUrl: "https://sdpa.sekolahbudiluhur.sch.id/",
+    liveUrl2: "https://sdkt.sekolahbudiluhur.sch.id/",
     learnings: [
-      "Laravel authentication system",
-      "Database relationships",
-      "Authorization policies",
-      "Pagination",
-      "Query optimization",
+      "WordPress CMS Management",
+      "Theme customization & configuration",
+      "Information Architecture for schools",
+      "Plugin integration",
+      "Content strategy & layouting"
     ],
   },
 ]
@@ -257,6 +269,17 @@ export default function Projects() {
                   {project.liveUrl && project.liveUrl !== "#" && (
                     <a
                       href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex-1 py-2 bg-accent hover:bg-accent/90 rounded text-base font-semibold transition-colors text-center text-accent-foreground"
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                  {project.liveUrl2 && project.liveUrl2 !== "#" && (
+                    <a
+                      href={project.liveUrl2}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}

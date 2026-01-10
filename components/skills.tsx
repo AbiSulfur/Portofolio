@@ -16,6 +16,7 @@ import {
   FaTools,
   FaServer,
   FaCode,
+  FaFigma,
 } from "react-icons/fa"
 
 interface SkillCategory {
@@ -34,7 +35,7 @@ const skillCategories: SkillCategory[] = [
       { name: "CSS3", icon: FaCss3Alt },
       { name: "JavaScript", icon: FaJs },
       { name: "WordPress", icon: FaWordpress },
-      { name: "Web Design", icon: FaCode },
+      { name: "Figma", icon: FaFigma },
     ],
   },
   {
@@ -43,8 +44,6 @@ const skillCategories: SkillCategory[] = [
       { name: "PHP", icon: FaPhp },
       { name: "Laravel", icon: FaLaravel },
       { name: "MySQL", icon: FaDatabase },
-      { name: "REST APIs", icon: FaServer },
-      { name: "Server Logic", icon: FaTools },
     ],
   },
   {
@@ -53,7 +52,6 @@ const skillCategories: SkillCategory[] = [
       { name: "Git & GitHub", icon: FaGitAlt },
       { name: "GitHub", icon: FaGithub },
       { name: "VS Code", icon: FaCode },
-      { name: "Web Development", icon: FaServer },
       { name: "CLI Tools", icon: FaTools },
     ],
   },
@@ -135,7 +133,7 @@ export default function Skills() {
                 { name: "Git", icon: FaGitAlt },
                 { name: "WordPress", icon: FaWordpress },
                 { name: "GitHub", icon: FaGithub },
-                { name: "REST APIs", icon: FaServer },
+                { name: "Figma", icon: FaFigma },
               ].map((tech, idx) => {
                 const Icon = tech.icon
                 return (
@@ -151,10 +149,6 @@ export default function Skills() {
               })}
             </div>
           </div>
-
-          <p className="text-center text-base text-muted-foreground mt-6">
-            Hover over the carousel to pause. New technologies coming soon as I continue learning.
-          </p>
         </div>
       </div>
     </section>
