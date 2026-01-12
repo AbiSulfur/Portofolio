@@ -3,6 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import { FiMail, FiGithub, FiLinkedin, FiInstagram, FiArrowRight, FiCheck } from "react-icons/fi"
+import emailjs from "@emailjs/browser"
 
 interface ContactLink {
   platform: string
@@ -64,7 +65,7 @@ const contactLinks: ContactLink[] = [
   {
     platform: "LinkedIn",
     icon: <FiLinkedin className="w-6 h-6" />,
-    url: "https://www.linkedin.com/in/benedictus-abi-66b038345/",
+    url: "https://www.linkedin.com/in/abigail-dev/",
     display: "Benedictus Abi",
     description: "Professional network & updates",
   },
@@ -105,18 +106,34 @@ export default function Contact() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitMessage("")
+
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+      time: new Date().toLocaleString(),
+      project_type: selectedProjectType
+        ? projectTypes.find((t) => t.id === selectedProjectType)?.label
+        : "Not specified",
+    }
 
     try {
-      // Simulate form submission
-      setTimeout(() => {
-        setSubmitMessage("Thanks for reaching out! I'll get back to you soon.")
-        setFormData({ name: "", email: "", message: "" })
-        setSelectedProjectType("")
-        setIsSubmitting(false)
-        setTimeout(() => setSubmitMessage(""), 3000)
-      }, 1000)
+      await emailjs.send(
+        "service_uqu36nw",
+        "template_6c29hfu",
+        templateParams,
+        "wDezi6aDDl8508CT2"
+      )
+      setSubmitMessage("Thanks for reaching out! I'll get back to you soon.")
+      setFormData({ name: "", email: "", message: "" })
+      setSelectedProjectType("")
+      setTimeout(() => setSubmitMessage(""), 5000)
     } catch (error) {
-      setSubmitMessage("Something went wrong. Please try again.")
+      setSubmitMessage(
+        "Something went wrong. Please try again or contact me directly via email."
+      )
+    } finally {
       setIsSubmitting(false)
     }
   }

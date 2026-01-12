@@ -1,6 +1,7 @@
 "use client"
 
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa"
+import Link from "next/link"
 
 const currentYear = new Date().getFullYear()
 
@@ -51,7 +52,7 @@ export default function Footer() {
             <div className="flex gap-4">
               {[
                 { name: "GitHub", url: "https://github.com/AbiSulfur", icon: FaGithub },
-                { name: "LinkedIn", url: "https://www.linkedin.com/in/benedictus-abi-66b038345/", icon: FaLinkedin },
+                { name: "LinkedIn", url: "https://www.linkedin.com/in/abigail-dev/", icon: FaLinkedin },
                 { name: "Instagram", url: "https://www.instagram.com/bened_tri/", icon: FaInstagram },
               ].map((social) => {
                 const IconComponent = social.icon
@@ -78,12 +79,12 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-foreground/60">
             <p>© {currentYear} Benedictus Abigail Triwiyatno. All rights reserved.</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-accent transition-colors">
+              <Link href="/privacy" className="hover:text-accent transition-colors">
                 Privacy
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">
+              </Link>
+              <Link href="/terms" className="hover:text-accent transition-colors">
                 Terms
-              </a>
+              </Link>
               <button onClick={scrollToTop} className="hover:text-accent transition-colors">
                 Back to Top
               </button>

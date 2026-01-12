@@ -28,7 +28,7 @@ const projects: Project[] = [
     type: "Full Stack",
     status: "Completed",
     imageUrl: "/Porto1.png",
-    liveUrl: "https://abigail-dev.vercel.app/",
+    liveUrl: "https://abigaildev.vercel.app/",
     githubUrl: "https://github.com/AbiSulfur/Portofolio",
     learnings: [
       "Component-based architecture with React",

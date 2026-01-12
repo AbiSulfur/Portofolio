@@ -1,10 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter, usePathname } from "next/navigation"
+import Link from "next/link"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +19,11 @@ export default function Header() {
   }, [])
 
   const scrollToSection = (id: string) => {
+    if (pathname !== "/") {
+      router.push(`/#${id}`)
+      setIsMenuOpen(false)
+      return
+    }
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
@@ -24,20 +33,19 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-background/40 backdrop-blur-xl border-b border-white/10 shadow-xl shadow-black/20"
-          : "bg-transparent backdrop-blur-md border-b border-white/5"
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
+        ? "bg-background/40 backdrop-blur-xl border-b border-white/10 shadow-xl shadow-black/20"
+        : "bg-transparent backdrop-blur-md border-b border-white/5"
+        }`}
     >
       <nav className="max-w-6xl mx-auto px-6 md:px-12 py-4 md:py-5 flex items-center justify-between">
-        <button
-          onClick={() => scrollToSection("hero")}
+        <Link
+          href="/"
           className="text-xl md:text-2xl font-bold hover:text-accent transition-colors cursor-pointer"
         >
           <span className="text-foreground">Abigail</span>
           <span className="text-accent">.</span>
-        </button>
+        </Link>
 
         <div className="hidden md:flex gap-8 items-center">
           {[
