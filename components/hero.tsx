@@ -23,7 +23,7 @@ export default function Hero() {
           <div className="md:col-span-6 flex justify-center">
             <div className="w-full max-w-sm">
               <img
-                src="/Abigail.png"
+                src="/Abigail.webp"
                 alt="Benedictus Abigail Triwiyatno"
                 className="w-full h-auto object-cover rounded-lg"
               />

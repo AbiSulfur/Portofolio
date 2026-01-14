@@ -27,7 +27,7 @@ const projects: Project[] = [
     technologies: ["React", "Next.js", "JavaScript", "TypeScript"],
     type: "Full Stack",
     status: "Completed",
-    imageUrl: "/Porto1.png",
+    imageUrl: "/Porto1.webp",
     liveUrl: "https://abigaildev.vercel.app/",
     githubUrl: "https://github.com/AbiSulfur/Portofolio",
     learnings: [
@@ -46,7 +46,7 @@ const projects: Project[] = [
     technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Bootstrap"],
     type: "Full Stack",
     status: "Completed",
-    imageUrl: "/Porto2.png",
+    imageUrl: "/Porto2.webp",
     liveUrl: "https://budiluhurdigital.com/project/10RPL/LeaflyTea/",
     githubUrl: "https://github.com/AbiSulfur/Leafly",
     learnings: [
@@ -66,7 +66,7 @@ const projects: Project[] = [
     technologies: ["JavaScript", "HTML5", "CSS3",],
     type: "Frontend",
     status: "Completed",
-    imageUrl: "/Porto3.png",
+    imageUrl: "/Porto3.webp",
     githubUrl: "https://github.com/AbiSulfur/Focusly",
     learnings: [
       "Intersection Observer API",
@@ -85,7 +85,7 @@ const projects: Project[] = [
     technologies: ["PHP", "MySQL", "Bootstrap 5", "Chart.js", "FPDF", "JavaScript",],      
     type: "Full Stack",
     status: "In Progress",
-    imageUrl: "/Porto4.png",
+    imageUrl: "/Porto4.webp",
     githubUrl: "https://github.com/AbiSulfur/Aplikasi-Kegiatan-Guru",
     learnings: [
       "PHP backend development",
@@ -106,7 +106,7 @@ const projects: Project[] = [
     technologies: ["HTML5", "Tailwind CSS", "JavaScript",],
     type: "Frontend",
     status: "Completed",
-    imageUrl: "/Porto5.png",
+    imageUrl: "/Porto5.webp",
     githubUrl: "https://github.com/AbiSulfur/Stockwise",
     learnings: [
       "Tailwind CSS utility classes",
@@ -125,7 +125,7 @@ const projects: Project[] = [
     technologies: ["WordPress", "PHP", "CSS", "MySQL"],
     type: "CMS Development",
     status: "In Progress",
-    imageUrl: "/Porto6.png", 
+    imageUrl: "/Porto6.webp", 
     liveUrl: "https://sdpa.sekolahbudiluhur.sch.id/",
     liveUrl2: "https://sdkt.sekolahbudiluhur.sch.id/",
     learnings: [
