@@ -2,8 +2,9 @@
 
 import type React from "react"
 import { useState } from "react"
-import { FiMail, FiGithub, FiLinkedin, FiInstagram, FiArrowRight, FiCheck } from "react-icons/fi"
+import { FiMail, FiGithub, FiLinkedin, FiInstagram, FiArrowRight, FiCheck, FiMapPin } from "react-icons/fi"
 import emailjs from "@emailjs/browser"
+import { useLanguage } from "@/components/language-provider"
 
 interface ContactLink {
   platform: string
@@ -12,40 +13,6 @@ interface ContactLink {
   display: string
   description: string
 }
-
-interface ProjectType {
-  id: string
-  label: string
-  description: string
-  icon: React.ReactNode
-}
-
-const projectTypes: ProjectType[] = [
-  {
-    id: "internship",
-    label: "Internship Opportunity",
-    description: "Looking for talented interns",
-    icon: "🎓",
-  },
-  {
-    id: "collaboration",
-    label: "Project Collaboration",
-    description: "Build something together",
-    icon: "🚀",
-  },
-  {
-    id: "feedback",
-    label: "Feedback & Mentoring",
-    description: "Share insights & guidance",
-    icon: "💡",
-  },
-  {
-    id: "just-chat",
-    label: "Just Want to Chat",
-    description: "Coffee talk or networking",
-    icon: "☕",
-  },
-]
 
 const contactLinks: ContactLink[] = [
   {
@@ -79,7 +46,7 @@ const contactLinks: ContactLink[] = [
 ]
 
 export default function Contact() {
-  const [selectedProjectType, setSelectedProjectType] = useState<string>("")
+  const { t } = useLanguage()
   const [copied, setCopied] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
@@ -113,9 +80,6 @@ export default function Contact() {
       email: formData.email,
       message: formData.message,
       time: new Date().toLocaleString(),
-      project_type: selectedProjectType
-        ? projectTypes.find((t) => t.id === selectedProjectType)?.label
-        : "Not specified",
     }
 
     try {
@@ -125,14 +89,11 @@ export default function Contact() {
         templateParams,
         "wDezi6aDDl8508CT2"
       )
-      setSubmitMessage("Thanks for reaching out! I'll get back to you soon.")
+      setSubmitMessage(t("contact", "successMessage"))
       setFormData({ name: "", email: "", message: "" })
-      setSelectedProjectType("")
       setTimeout(() => setSubmitMessage(""), 5000)
     } catch (error) {
-      setSubmitMessage(
-        "Something went wrong. Please try again or contact me directly via email."
-      )
+      setSubmitMessage(t("contact", "errorMessage"))
     } finally {
       setIsSubmitting(false)
     }
@@ -148,37 +109,15 @@ export default function Contact() {
 
         <div className="max-w-5xl mx-auto">
           <div className="mb-24 text-center">
-            <p className="text-accent font-semibold text-lg mb-4 tracking-wide">GET IN TOUCH</p>
-            <h2 className="section-title mb-8 text-balance">Let's build something simple, useful, and done right</h2>
+            <p className="text-accent font-semibold text-lg mb-4 tracking-wide text-uppercase">{t("contact", "title")}</p>
+            <h2 className="section-title mb-8 text-balance">{t("contact", "title")}</h2>
             <p className="section-subtitle max-w-3xl mx-auto">
-              Whether you have an internship opportunity, want to collaborate, or just want to chat—I'm here and excited
-              to connect. Let me know what's on your mind.
+              {t("contact", "subtitle")}
             </p>
           </div>
 
-          <div className="mb-20">
-            <h3 className="text-xl font-semibold text-foreground mb-8 text-center">What brings you here?</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {projectTypes.map((type) => (
-                <button
-                  key={type.id}
-                  onClick={() => setSelectedProjectType(type.id)}
-                  className={`group p-6 rounded-xl border-2 transition-all duration-300 text-left ${
-                    selectedProjectType === type.id
-                      ? "border-accent bg-accent/10 shadow-lg shadow-accent/20"
-                      : "border-border/30 bg-card/40 hover:border-accent/50 hover:bg-card/60"
-                  }`}
-                >
-                  <div className="text-3xl mb-3">{type.icon}</div>
-                  <h4 className="font-semibold text-foreground mb-1 text-base">{type.label}</h4>
-                  <p className="text-sm text-muted-foreground">{type.description}</p>
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="mb-24">
-            <h3 className="text-xl font-semibold text-foreground mb-10 text-center">Direct ways to reach me</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-10 text-center">{t("contact", "directContact")}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {contactLinks.map((link) => (
                 <a
@@ -201,7 +140,6 @@ export default function Contact() {
           </div>
 
           <div className="mb-24 text-center">
-            <p className="text-sm text-muted-foreground mb-6">Prefer quick action?</p>
             <button
               onClick={handleCopyEmail}
               className="inline-flex items-center gap-2 px-8 py-4 bg-accent hover:bg-accent/90 text-accent-foreground rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-accent/30 hover:shadow-accent/40 hover:-translate-y-1 text-base"
@@ -214,23 +152,20 @@ export default function Contact() {
               ) : (
                 <>
                   <FiMail className="w-5 h-5" />
-                  Copy Email Address
+                  {t("contact", "emailMe")}
                 </>
               )}
             </button>
           </div>
 
           <div className="bg-card/50 backdrop-blur border border-border/30 rounded-xl p-10 md:p-14">
-            <h3 className="text-2xl font-semibold text-foreground mb-2 text-center">Send me a message</h3>
-            <p className="text-center text-muted-foreground mb-10">
-              Or fill out the form below if you prefer a more detailed conversation starter
-            </p>
+            <h3 className="text-2xl font-semibold text-foreground mb-8 text-center">{t("contact", "title")}</h3>
 
             <form onSubmit={handleFormSubmit} className="max-w-2xl mx-auto space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Your Name
+                    {t("contact", "nameLabel")}
                   </label>
                   <input
                     type="text"
@@ -238,14 +173,14 @@ export default function Contact() {
                     name="name"
                     value={formData.name}
                     onChange={handleFormChange}
-                    placeholder="Abigail"
+                    placeholder={t("contact", "namePlaceholder")}
                     className="w-full px-4 py-3 bg-card border border-border/30 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-300"
                     required
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    Your Email
+                    {t("contact", "emailLabel")}
                   </label>
                   <input
                     type="email"
@@ -253,7 +188,7 @@ export default function Contact() {
                     name="email"
                     value={formData.email}
                     onChange={handleFormChange}
-                    placeholder="you@example.com"
+                    placeholder={t("contact", "emailPlaceholder")}
                     className="w-full px-4 py-3 bg-card border border-border/30 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-300"
                     required
                   />
@@ -262,35 +197,26 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                  Your Message
+                  {t("contact", "messageLabel")}
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleFormChange}
-                  placeholder="Tell me about your project, opportunity, or just say hi..."
+                  placeholder={t("contact", "messagePlaceholder")}
                   rows={6}
                   className="w-full px-4 py-3 bg-card border border-border/30 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-300 resize-none"
                   required
                 />
               </div>
 
-              {selectedProjectType && (
-                <div className="p-4 bg-accent/5 border border-accent/20 rounded-lg">
-                  <p className="text-sm text-foreground">
-                    <span className="font-semibold">You selected:</span>{" "}
-                    <span className="text-accent">{projectTypes.find((t) => t.id === selectedProjectType)?.label}</span>
-                  </p>
-                </div>
-              )}
-
               {submitMessage && (
                 <div
                   className={`p-4 rounded-lg text-center font-medium transition-all duration-300 ${
-                    submitMessage.includes("Thanks")
-                      ? "bg-green-500/10 text-green-400 border border-green-500/30"
-                      : "bg-destructive/10 text-destructive border border-destructive/30"
+                    submitMessage.includes("wrong")
+                      ? "bg-destructive/10 text-destructive border border-destructive/30"
+                      : "bg-green-500/10 text-green-400 border border-green-500/30"
                   }`}
                 >
                   {submitMessage}
@@ -302,7 +228,7 @@ export default function Contact() {
                 disabled={isSubmitting}
                 className="w-full px-8 py-4 bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-accent-foreground rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-accent/30 hover:shadow-accent/40 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? t("contact", "sendingButton") : t("contact", "submitButton")}
               </button>
             </form>
           </div>
@@ -310,11 +236,12 @@ export default function Contact() {
           <div className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8 text-center md:text-left">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="text-sm text-foreground/70">Available for opportunities</span>
+              <span className="text-sm text-foreground/70">{t("about", "statusText")}</span>
             </div>
             <div className="hidden md:block w-px h-6 bg-border/30"></div>
-            <div className="text-sm text-foreground/70">
-              Usually responds within <span className="text-accent font-semibold">24 hours</span>
+            <div className="flex items-center gap-3">
+              <FiMapPin className="text-accent" />
+              <span className="text-sm text-foreground/70">{t("contact", "locationDetails")}</span>
             </div>
           </div>
         </div>

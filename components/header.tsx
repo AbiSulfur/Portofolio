@@ -3,12 +3,14 @@
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
+import { useLanguage } from "@/components/language-provider"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
+  const { language, setLanguage, t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +33,17 @@ export default function Header() {
     }
   }
 
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'id' : 'en');
+  }
+
+  const navItems = [
+    { label: t("nav", "about"), id: "about" },
+    { label: t("nav", "services"), id: "services" },
+    { label: t("nav", "projects"), id: "projects" },
+    { label: t("nav", "contact"), id: "contact" },
+  ]
+
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
@@ -48,12 +61,7 @@ export default function Header() {
         </Link>
 
         <div className="hidden md:flex gap-8 items-center">
-          {[
-            { label: "About", id: "about" },
-            { label: "Skills", id: "skills" },
-            { label: "Projects", id: "projects" },
-            { label: "Contact", id: "contact" },
-          ].map((item) => (
+          {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
@@ -63,33 +71,42 @@ export default function Header() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-accent/50 group-hover:w-full transition-all duration-300"></span>
             </button>
           ))}
+          <button 
+            onClick={toggleLanguage}
+            className="text-xs font-bold px-3 py-1 bg-accent/10 text-accent rounded-full border border-accent/20 hover:bg-accent hover:text-background transition-colors"
+          >
+            {language === 'en' ? 'ID' : 'EN'}
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 text-foreground hover:text-accent transition-colors"
-          aria-label="Toggle menu"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {isMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+          <button 
+            onClick={toggleLanguage}
+            className="text-xs font-bold px-2 py-1 bg-accent/10 text-accent rounded-full border border-accent/20"
+          >
+            {language === 'en' ? 'ID' : 'EN'}
+          </button>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 text-foreground hover:text-accent transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
       </nav>
 
       {isMenuOpen && (
         <div className="md:hidden bg-card/30 backdrop-blur-xl border-b border-white/10 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col gap-4 px-6 py-4">
-            {[
-              { label: "About", id: "about" },
-              { label: "Skills", id: "skills" },
-              { label: "Projects", id: "projects" },
-              { label: "Contact", id: "contact" },
-            ].map((item) => (
+            {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}

@@ -2,15 +2,16 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { LanguageProvider } from "@/components/language-provider"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Benedictus Abigail Triwiyatno - Junior Web Developer",
+  title: "Benedictus Abigail Triwiyatno - Web Developer",
   description:
-    "Portfolio of Benedictus Abigail Triwiyatno, a junior web developer specializing in HTML, CSS, JavaScript, PHP, and Laravel. Currently studying at SMK Budi Luhur.",
+    "Portfolio of Benedictus Abigail Triwiyatno, a web developer specializing in building high-converting and professional business websites.",
   generator: "v0.app",
   icons: {
     icon: [
@@ -39,7 +40,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body className={`font-sans antialiased bg-background text-foreground`}>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>
