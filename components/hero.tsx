@@ -1,6 +1,7 @@
 "use client"
 
 import { useLanguage } from "@/components/language-provider"
+import Image from "next/image"
 
 export default function Hero() {
   const { t } = useLanguage()
@@ -27,11 +28,14 @@ export default function Hero() {
 
           {/* CENTER COLUMN - Profile Image (Focal Point) */}
           <div className="md:col-span-4 flex justify-center">
-            <div className="w-full max-w-sm">
-              <img
+            <div className="w-full max-w-sm relative aspect-[3/4]">
+              <Image
                 src="/Abigail.webp"
                 alt="Benedictus Abigail Triwiyatno"
-                className="w-full h-auto object-cover rounded-lg"
+                fill
+                priority
+                className="object-cover rounded-lg"
+                sizes="(max-width: 768px) 100vw, 33vw"
               />
             </div>
           </div>
@@ -75,3 +79,4 @@ export default function Hero() {
     </section>
   )
 }
+

@@ -1,6 +1,7 @@
 "use client"
 
 import { useLanguage } from "@/components/language-provider"
+import Image from "next/image"
 
 interface ProjectData {
   id: number
@@ -123,11 +124,13 @@ export default function Projects() {
               className="glass-card flex flex-col border border-border/20 hover:border-accent/40 shadow-sm transition-all duration-300 h-full overflow-hidden group"
             >
               {/* Project Image */}
-              <div className="relative h-56 overflow-hidden bg-gradient-to-br from-accent/10 to-background border-b border-border/20">
-                <img
+              <div className="relative h-56 overflow-hidden bg-gradient-to-br from-accent/10 to-background border-b border-border/20 relative">
+                <Image
                   src={project.imageUrl || "/placeholder.svg"}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -192,4 +195,5 @@ export default function Projects() {
     </section>
   )
 }
+
 

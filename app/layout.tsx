@@ -1,12 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { DM_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LanguageProvider } from "@/components/language-provider"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+})
 
 export const metadata: Metadata = {
   title: "Benedictus Abigail Triwiyatno - Web Developer",
@@ -38,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className={`dark scroll-smooth ${dmSans.variable}`}>
       <body className={`font-sans antialiased bg-background text-foreground`}>
         <LanguageProvider>
           {children}
@@ -48,3 +51,4 @@ export default function RootLayout({
     </html>
   )
 }
+
