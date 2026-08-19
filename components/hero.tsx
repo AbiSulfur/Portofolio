@@ -38,7 +38,7 @@ export default function Hero() {
           setTimeout(() => setShowCursor(false), 1500)
         }
       }, 55)
-    }, 1500)
+    }, 3500)
 
     return () => {
       clearTimeout(startDelay)

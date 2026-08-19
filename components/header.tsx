@@ -124,7 +124,7 @@ export default function Header() {
             <button 
               onClick={toggleLanguage}
               className="text-xs font-bold px-2 py-1 bg-accent/10 text-accent rounded-full border border-accent/20"
-              aria-label={language === 'en' ? 'Switch to Indonesian' : 'Switch to English'}
+              aria-label={language === 'en' ? 'ID - Switch to Indonesian' : 'EN - Switch to English'}
             >
               {language === 'en' ? 'ID' : 'EN'}
             </button>
