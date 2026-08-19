@@ -1,62 +1,67 @@
 "use client"
 
 import { useLanguage } from "@/components/language-provider"
+import { useScrollReveal } from "@/hooks/useScrollReveal"
 
 export default function Trust() {
   const { t } = useLanguage()
+  useScrollReveal()
 
-  const testimonials = [
+  const steps = [
     {
-      quote: t("trust", "testi1Quote"),
-      author: t("trust", "testi1Author"),
-      role: t("trust", "testi1Role"),
-      initial: "S"
+      title: t("process", "step1Title"),
+      desc: t("process", "step1Desc"),
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      )
     },
     {
-      quote: t("trust", "testi2Quote"),
-      author: t("trust", "testi2Author"),
-      role: t("trust", "testi2Role"),
-      initial: "M"
+      title: t("process", "step2Title"),
+      desc: t("process", "step2Desc"),
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+      )
     },
     {
-      quote: t("trust", "testi3Quote"),
-      author: t("trust", "testi3Author"),
-      role: t("trust", "testi3Role"),
-      initial: "A"
+      title: t("process", "step3Title"),
+      desc: t("process", "step3Desc"),
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      )
     }
   ]
 
   return (
     <section className="section-padding bg-background border-t border-border/10">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="section-title mb-4">{t("trust", "title")}</h2>
+        <div className="text-center mb-16" data-reveal>
+          <h2 className="section-title mb-4">{t("process", "title")}</h2>
           <div className="w-20 h-1.5 bg-gradient-to-r from-accent via-accent/70 to-accent/30 rounded-full mx-auto"></div>
           <p className="section-subtitle mt-6 max-w-2xl mx-auto">
-            {t("trust", "subtitle")}
+            {t("process", "subtitle")}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testi, idx) => (
-            <div key={idx} className="glass-card p-8 border border-border/20 relative">
-              <div className="absolute top-6 left-6 text-accent/20">
-                <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8" data-reveal>
+          {steps.map((step, idx) => (
+            <div
+              key={idx}
+              data-reveal-child
+              className="glass-card p-8 border border-border/20 relative hover:border-accent/40 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1 transition-all duration-[250ms] ease-out flex flex-col"
+            >
+              <div className="w-16 h-16 rounded-2xl bg-accent/10 text-accent flex items-center justify-center mb-6">
+                {step.icon}
               </div>
-              <p className="text-foreground/80 italic relative z-10 pt-6 mb-8 min-h-[5rem] leading-relaxed">
-                "{testi.quote}"
+              <h3 className="text-xl font-bold text-foreground mb-4">{step.title}</h3>
+              <p className="text-foreground/70 leading-relaxed">
+                {step.desc}
               </p>
-              <div className="flex items-center gap-4 mt-auto">
-                <div className="w-12 h-12 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-bold text-lg">
-                  {testi.initial}
-                </div>
-                <div>
-                  <h4 className="font-bold text-foreground">{testi.author}</h4>
-                  <p className="text-sm text-muted-foreground">{testi.role}</p>
-                </div>
-              </div>
             </div>
           ))}
         </div>

@@ -12,10 +12,19 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Benedictus Abigail Triwiyatno - Web Developer",
+  title: "Benedictus Abigail Triwiyatno | Freelance Web Developer Indonesia",
   description:
-    "Portfolio of Benedictus Abigail Triwiyatno, a web developer specializing in building high-converting and professional business websites.",
-  generator: "v0.app",
+    "Portfolio of Benedictus Abigail Triwiyatno, a professional freelance web developer in Indonesia specializing in high-converting B2B websites, SaaS landing pages, and custom web applications.",
+  keywords: ["Freelance Web Developer Indonesia", "B2B Web Apps", "React Developer Jakarta", "Next.js Developer Indonesia", "Jasa Pembuatan Website Profesional", "SaaS Landing Page"],
+  authors: [{ name: "Benedictus Abigail Triwiyatno" }],
+  openGraph: {
+    title: "Benedictus Abigail Triwiyatno | Freelance Web Developer",
+    description: "Professional web development services for businesses. Specializing in high-converting websites and modern web applications.",
+    url: "https://abigaildev.vercel.app/",
+    siteName: "Abigail Dev Portfolio",
+    locale: "id_ID",
+    type: "website",
+  },
   icons: {
     icon: [
       {

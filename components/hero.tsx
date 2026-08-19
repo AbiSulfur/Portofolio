@@ -1,82 +1,133 @@
 "use client"
 
+import { useState, useEffect, useRef } from "react"
 import { useLanguage } from "@/components/language-provider"
-import Image from "next/image"
 
 export default function Hero() {
   const { t } = useLanguage()
 
+  // Typewriter state
+  const fullText = `${t("hero", "headlinePart1")} ${t("hero", "headlinePart2")} ${t("hero", "headlinePart3")}`
+  const [displayedText, setDisplayedText] = useState("")
+  const [isTypingDone, setIsTypingDone] = useState(false)
+  const [showCursor, setShowCursor] = useState(true)
+  const hasTyped = useRef(false)
+
+  useEffect(() => {
+    // Respect reduced motion
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedMotion || hasTyped.current) {
+      setDisplayedText(fullText)
+      setIsTypingDone(true)
+      setShowCursor(false)
+      return
+    }
+
+    hasTyped.current = true
+    let index = 0
+    const interval = setInterval(() => {
+      setDisplayedText(fullText.slice(0, index + 1))
+      index++
+      if (index >= fullText.length) {
+        clearInterval(interval)
+        setIsTypingDone(true)
+        // Hide cursor 1.5s after typing finishes
+        setTimeout(() => setShowCursor(false), 1500)
+      }
+    }, 55)
+
+    return () => clearInterval(interval)
+  }, [fullText])
+
+  // Split displayed text into parts for gradient styling
+  const part1 = t("hero", "headlinePart1")
+  const part2 = t("hero", "headlinePart2")
+  const part3 = t("hero", "headlinePart3")
+
+  const renderTypedText = () => {
+    const p1End = part1.length + 1 // +1 for the space
+    const p2End = p1End + part2.length + 1
+
+    const visiblePart1 = displayedText.slice(0, Math.min(displayedText.length, part1.length))
+    const visiblePart2 = displayedText.length > p1End
+      ? displayedText.slice(p1End, Math.min(displayedText.length, p1End + part2.length))
+      : ""
+    const visiblePart3 = displayedText.length > p2End
+      ? displayedText.slice(p2End)
+      : ""
+
+    return (
+      <>
+        {visiblePart1}
+        {displayedText.length >= part1.length && " "}
+        {visiblePart2 && <span className="gradient-text">{visiblePart2}</span>}
+        {displayedText.length >= p1End + part2.length && " "}
+        {visiblePart3}
+        {showCursor && <span className="typewriter-cursor" />}
+      </>
+    )
+  }
+
+  const badges = [
+    { text: t("hero", "badge1"), icon: "📱" },
+    { text: t("hero", "badge2"), icon: "⚡" },
+    { text: t("hero", "badge3"), icon: "💎" },
+  ]
+
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-32 px-6 md:px-12">
-      <div className="w-full max-w-6xl mx-auto">
-        {/* Grid layout: left section | center photo | right section */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-          {/* LEFT COLUMN - Name and Introduction */}
-          <div className="md:col-span-4 flex flex-col justify-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
-              {t("hero", "headlinePart1")}
-              <br/>
-              <span className="gradient-text">{t("hero", "headlinePart2")}</span>
-              <br/>
-              {t("hero", "headlinePart3")}
-            </h1>
-            <div className="w-12 h-1 bg-accent mb-6 rounded-full"></div>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              {t("hero", "subtitle")}
-            </p>
-          </div>
+    <section id="hero" className="min-h-screen flex items-center justify-center pt-32 pb-16 px-6 md:px-12 relative overflow-hidden">
+      {/* Background ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/[0.08] rounded-full blur-[120px] pointer-events-none"></div>
 
-          {/* CENTER COLUMN - Profile Image (Focal Point) */}
-          <div className="md:col-span-4 flex justify-center">
-            <div className="w-full max-w-sm relative aspect-[3/4]">
-              <Image
-                src="/Abigail.webp"
-                alt="Benedictus Abigail Triwiyatno"
-                fill
-                priority
-                className="object-cover rounded-lg"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN - Professional Details and CTA */}
-          <div className="md:col-span-4 flex flex-col justify-center">
-            <div className="mb-8 hidden md:block">
-              <p className="text-lg text-muted-foreground font-semibold uppercase tracking-wide mb-3">
-                {t("hero", "introTitle")}
-              </p>
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                {t("hero", "introText")}
-              </p>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col gap-3 mt-4 md:mt-0">
-              <button
-                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-6 py-3 bg-accent hover:bg-accent/90 text-accent-foreground rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 text-base w-full text-center"
-              >
-                {t("hero", "ctaPrimary")}
-              </button>
-              <button
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-6 py-3 bg-card hover:bg-card/80 text-foreground border border-border rounded-lg font-semibold transition-all duration-300 hover:border-accent/50 text-base w-full text-center"
-              >
-                {t("hero", "ctaSecondary")}
-              </button>
-            </div>
-          </div>
+      <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center relative z-10">
+        {/* Available Badge */}
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <span className="available-dot"></span>
+          <span className="text-sm font-medium text-foreground/70 tracking-wide">
+            {t("hero", "available")}
+          </span>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex justify-center animate-bounce hidden md:flex">
-        <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight min-h-[3.5em] md:min-h-[3em]">
+          {renderTypedText()}
+        </h1>
+
+        <div className="w-16 h-1 bg-gradient-to-r from-accent via-accent/70 to-accent/30 rounded-full mx-auto mb-6"></div>
+
+        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10">
+          {t("hero", "subtitle")}
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12 w-full sm:w-auto">
+          <a
+            href="https://wa.me/6287725223486"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-accent hover:bg-accent/90 text-accent-foreground rounded-lg font-bold transition-all duration-300 hover:shadow-xl hover:shadow-accent/40 text-base sm:text-lg text-center hover:-translate-y-1"
+          >
+            {t("hero", "ctaPrimary")}
+          </a>
+          <button
+            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+            className="px-8 py-4 bg-card hover:bg-card/80 text-foreground border border-border rounded-lg font-bold transition-all duration-300 hover:border-accent/50 text-base sm:text-lg text-center shadow-sm"
+          >
+            {t("hero", "ctaSecondary")}
+          </button>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8 opacity-70">
+          {badges.map((badge, idx) => (
+            <div key={idx} className="flex items-center gap-2">
+              <span className="text-lg">{badge.icon}</span>
+              <span className="text-sm font-semibold text-foreground/70 tracking-wide">
+                {badge.text}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
 }
-

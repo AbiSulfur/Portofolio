@@ -1,59 +1,37 @@
 "use client"
 
 import { useLanguage } from "@/components/language-provider"
+import { useScrollReveal } from "@/hooks/useScrollReveal"
 
 export default function ValueProposition() {
   const { t } = useLanguage()
+  useScrollReveal()
 
-  const problemsList = [
+  const valueProps = [
     {
       problem: t("valueProp", "problem1"),
       solution: t("valueProp", "solution1"),
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
+      featureTitle: t("valueProp", "cleanCode"),
+      featureDesc: t("valueProp", "cleanCodeDesc"),
     },
     {
       problem: t("valueProp", "problem2"),
       solution: t("valueProp", "solution2"),
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-        </svg>
-      )
+      featureTitle: t("valueProp", "modernDesign"),
+      featureDesc: t("valueProp", "modernDesignDesc"),
     },
     {
       problem: t("valueProp", "problem3"),
       solution: t("valueProp", "solution3"),
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-        </svg>
-      )
-    }
-  ]
-
-  const featuresList = [
-    {
-      title: t("valueProp", "cleanCode"),
-      desc: t("valueProp", "cleanCodeDesc"),
-    },
-    {
-      title: t("valueProp", "modernDesign"),
-      desc: t("valueProp", "modernDesignDesc"),
-    },
-    {
-      title: t("valueProp", "businessFocus"),
-      desc: t("valueProp", "businessFocusDesc"),
+      featureTitle: t("valueProp", "businessFocus"),
+      featureDesc: t("valueProp", "businessFocusDesc"),
     }
   ]
 
   return (
     <section className="section-padding bg-background border-t border-border/10">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-reveal>
           <h2 className="section-title mb-4">{t("valueProp", "title")}</h2>
           <div className="w-20 h-1.5 bg-gradient-to-r from-accent via-accent/70 to-accent/30 rounded-full mx-auto"></div>
           <p className="section-subtitle mt-6 max-w-2xl mx-auto">
@@ -61,50 +39,47 @@ export default function ValueProposition() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left Column: Problems & Solutions */}
-          <div className="space-y-6">
-            {problemsList.map((item, index) => (
-              <div key={index} className="flex gap-4 p-5 glass-card card-hover border border-border/20">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-accent/10 text-accent">
-                  {item.icon}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8" data-reveal>
+          {valueProps.map((item, index) => (
+            <div
+              key={index}
+              data-reveal-child
+              className="glass-card flex flex-col overflow-hidden border border-border/20 group hover:border-accent/40 hover:shadow-xl hover:shadow-accent/10 transition-all duration-300 hover:-translate-y-1"
+            >
+              {/* Problem State */}
+              <div className="p-6 bg-red-500/5 border-b border-red-500/10 flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-foreground mb-1">{item.problem}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.solution}</p>
+                  <h3 className="text-sm font-bold text-red-500/70 uppercase tracking-wider mb-1">Problem</h3>
+                  <p className="text-foreground font-semibold text-lg">{item.problem}</p>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Right Column: Why choose me details */}
-          <div className="space-y-8">
-            <div className="relative">
-              {/* Decorative elements */}
-              <div className="absolute -inset-4 bg-accent/5 rounded-xl blur-lg z-0"></div>
-              
-              <div className="relative z-10 space-y-6">
-                {featuresList.map((feature, idx) => (
-                  <div key={idx} className="border-l-2 border-accent/50 pl-5">
-                    <h4 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
-                       <span className="w-1.5 h-1.5 rounded-full bg-accent"></span>
-                       {feature.title}
-                    </h4>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {feature.desc}
-                    </p>
-                  </div>
-                ))}
+              {/* Solution State */}
+              <div className="p-6 bg-accent/5 flex-grow flex items-start gap-4 relative overflow-hidden">
+                <div className="absolute -right-4 -bottom-4 opacity-5 pointer-events-none text-accent">
+                  <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 relative z-10">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div className="relative z-10">
+                  <h3 className="text-sm font-bold text-accent uppercase tracking-wider mb-1">Solution</h3>
+                  <h4 className="font-bold text-foreground text-lg mb-2">{item.featureTitle}</h4>
+                  <p className="text-foreground/80 text-sm leading-relaxed mb-3">{item.featureDesc}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed border-t border-accent/20 pt-3">{item.solution}</p>
+                </div>
               </div>
             </div>
-            
-            <button
-              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-              className="mt-4 px-6 py-3 bg-accent/10 hover:bg-accent text-accent hover:text-background rounded-lg font-semibold transition-all duration-300 w-full md:w-auto border border-accent/20 hover:border-accent"
-            >
-              {t("hero", "ctaPrimary")}
-            </button>
-          </div>
+          ))}
         </div>
       </div>
     </section>
