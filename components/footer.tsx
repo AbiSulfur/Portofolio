@@ -84,8 +84,9 @@ export default function Footer() {
                       rel="noopener noreferrer"
                       className="text-foreground/60 hover:text-accent hover:scale-110 transition-all duration-300"
                       title={social.name}
+                      aria-label={social.name}
                     >
-                      <IconComponent size={20} />
+                      <IconComponent size={20} aria-hidden="true" />
                     </a>
                   )
                 })}
