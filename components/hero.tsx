@@ -23,20 +23,27 @@ export default function Hero() {
       return
     }
 
-    hasTyped.current = true
-    let index = 0
-    const interval = setInterval(() => {
-      setDisplayedText(fullText.slice(0, index + 1))
-      index++
-      if (index >= fullText.length) {
-        clearInterval(interval)
-        setIsTypingDone(true)
-        // Hide cursor 1.5s after typing finishes
-        setTimeout(() => setShowCursor(false), 1500)
-      }
-    }, 55)
+    let interval: NodeJS.Timeout
+    // Delay typewriter to improve Lighthouse TBT (Time to Interactive)
+    const startDelay = setTimeout(() => {
+      hasTyped.current = true
+      let index = 0
+      interval = setInterval(() => {
+        setDisplayedText(fullText.slice(0, index + 1))
+        index++
+        if (index >= fullText.length) {
+          clearInterval(interval)
+          setIsTypingDone(true)
+          // Hide cursor 1.5s after typing finishes
+          setTimeout(() => setShowCursor(false), 1500)
+        }
+      }, 55)
+    }, 1500)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearTimeout(startDelay)
+      if (interval) clearInterval(interval)
+    }
   }, [fullText])
 
   // Split displayed text into parts for gradient styling
@@ -88,8 +95,17 @@ export default function Hero() {
           </span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight min-h-[3.5em] md:min-h-[3em]">
-          {renderTypedText()}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight relative">
+          {/* Invisible full text for perfect CLS layout */}
+          <div className="opacity-0 pointer-events-none select-none" aria-hidden="true">
+            {part1} <span className="gradient-text">{part2}</span> {part3}
+          </div>
+          {/* Visible typing text overlaid exactly on top */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center">
+            <div className="w-full text-center">
+              {renderTypedText()}
+            </div>
+          </div>
         </h1>
 
         <div className="w-16 h-1 bg-gradient-to-r from-accent via-accent/70 to-accent/30 rounded-full mx-auto mb-6"></div>
