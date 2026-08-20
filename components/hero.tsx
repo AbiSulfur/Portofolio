@@ -3,77 +3,95 @@
 import { useState, useEffect, useRef } from "react"
 import { useLanguage } from "@/components/language-provider"
 
-export default function Hero() {
-  const { t } = useLanguage()
-
-  // Typewriter state
-  const fullText = `${t("hero", "headlinePart1")} ${t("hero", "headlinePart2")} ${t("hero", "headlinePart3")}`
-  const [displayedText, setDisplayedText] = useState("")
-  const [isTypingDone, setIsTypingDone] = useState(false)
-  const [showCursor, setShowCursor] = useState(true)
-  const hasTyped = useRef(false)
+function TypewriterText({ part1, part2, part3 }: { part1: string, part2: string, part3: string }) {
+  const p1Ref = useRef<HTMLSpanElement>(null)
+  const p2Ref = useRef<HTMLSpanElement>(null)
+  const p3Ref = useRef<HTMLSpanElement>(null)
+  const cursorRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     // Respect reduced motion
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (prefersReducedMotion || hasTyped.current) {
-      setDisplayedText(fullText)
-      setIsTypingDone(true)
-      setShowCursor(false)
+    if (prefersReducedMotion) {
+      if (p1Ref.current) p1Ref.current.textContent = part1 + " "
+      if (p2Ref.current) p2Ref.current.textContent = part2 + " "
+      if (p3Ref.current) p3Ref.current.textContent = part3
+      if (cursorRef.current) cursorRef.current.style.display = "none"
       return
     }
 
-    let interval: NodeJS.Timeout
-    // Delay typewriter to improve Lighthouse TBT (Time to Interactive)
-    const startDelay = setTimeout(() => {
-      hasTyped.current = true
-      let index = 0
-      interval = setInterval(() => {
-        setDisplayedText(fullText.slice(0, index + 1))
+    const fullText = `${part1} ${part2} ${part3}`
+    const p1End = part1.length + 1
+    const p2End = p1End + part2.length + 1
+    
+    let index = 0
+    let lastTime = 0
+    let animationFrameId: number
+    let timeoutId: NodeJS.Timeout
+
+    const renderText = (currentLen: number) => {
+      const vPart1 = fullText.slice(0, Math.min(currentLen, part1.length))
+      const vPart2 = currentLen > p1End ? fullText.slice(p1End, Math.min(currentLen, p1End + part2.length)) : ""
+      const vPart3 = currentLen > p2End ? fullText.slice(p2End, currentLen) : ""
+      
+      if (p1Ref.current) p1Ref.current.textContent = vPart1 + (currentLen >= part1.length ? " " : "")
+      if (p2Ref.current) p2Ref.current.textContent = vPart2 + (currentLen >= p1End + part2.length ? " " : "")
+      if (p3Ref.current) p3Ref.current.textContent = vPart3
+      
+      if (currentLen >= fullText.length) {
+         setTimeout(() => {
+           if (cursorRef.current) cursorRef.current.style.display = "none"
+         }, 1500)
+      }
+    }
+
+    const animate = (timestamp: number) => {
+      if (timestamp - lastTime >= 55) {
+        lastTime = timestamp
         index++
-        if (index >= fullText.length) {
-          clearInterval(interval)
-          setIsTypingDone(true)
-          // Hide cursor 1.5s after typing finishes
-          setTimeout(() => setShowCursor(false), 1500)
-        }
-      }, 55)
-    }, 3500)
+        renderText(index)
+      }
+      
+      if (index < fullText.length) {
+        animationFrameId = requestAnimationFrame(animate)
+      }
+    }
+    
+    // Initial empty state
+    if (p1Ref.current) p1Ref.current.textContent = ""
+    if (p2Ref.current) p2Ref.current.textContent = ""
+    if (p3Ref.current) p3Ref.current.textContent = ""
+    if (cursorRef.current) cursorRef.current.style.display = "inline-block"
+
+    // Start animation only after 1.5s to avoid spinning requestAnimationFrame
+    timeoutId = setTimeout(() => {
+      lastTime = document.timeline ? (document.timeline.currentTime as number) : performance.now()
+      animationFrameId = requestAnimationFrame(animate)
+    }, 1500)
 
     return () => {
-      clearTimeout(startDelay)
-      if (interval) clearInterval(interval)
+      clearTimeout(timeoutId)
+      if (animationFrameId) cancelAnimationFrame(animationFrameId)
     }
-  }, [fullText])
+  }, [part1, part2, part3])
+
+  return (
+    <div className="w-full text-center">
+      <span ref={p1Ref}></span>
+      <span ref={p2Ref} className="gradient-text"></span>
+      <span ref={p3Ref}></span>
+      <span ref={cursorRef} className="typewriter-cursor"></span>
+    </div>
+  )
+}
+
+export default function Hero() {
+  const { t } = useLanguage()
 
   // Split displayed text into parts for gradient styling
   const part1 = t("hero", "headlinePart1")
   const part2 = t("hero", "headlinePart2")
   const part3 = t("hero", "headlinePart3")
-
-  const renderTypedText = () => {
-    const p1End = part1.length + 1 // +1 for the space
-    const p2End = p1End + part2.length + 1
-
-    const visiblePart1 = displayedText.slice(0, Math.min(displayedText.length, part1.length))
-    const visiblePart2 = displayedText.length > p1End
-      ? displayedText.slice(p1End, Math.min(displayedText.length, p1End + part2.length))
-      : ""
-    const visiblePart3 = displayedText.length > p2End
-      ? displayedText.slice(p2End)
-      : ""
-
-    return (
-      <>
-        {visiblePart1}
-        {displayedText.length >= part1.length && " "}
-        {visiblePart2 && <span className="gradient-text">{visiblePart2}</span>}
-        {displayedText.length >= p1End + part2.length && " "}
-        {visiblePart3}
-        {showCursor && <span className="typewriter-cursor" />}
-      </>
-    )
-  }
 
   const badges = [
     { text: t("hero", "badge1"), icon: "📱" },
@@ -102,9 +120,7 @@ export default function Hero() {
           </div>
           {/* Visible typing text overlaid exactly on top */}
           <div className="absolute inset-0 flex flex-col justify-center items-center">
-            <div className="w-full text-center">
-              {renderTypedText()}
-            </div>
+            <TypewriterText part1={part1} part2={part2} part3={part3} />
           </div>
         </h1>
 

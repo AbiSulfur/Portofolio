@@ -8,13 +8,10 @@ import { useEffect, useRef } from "react"
  * Children with [data-reveal-child] get staggered animation-delay (80ms increments).
  * Respects prefers-reduced-motion.
  */
+let observer: IntersectionObserver | null = null
+
 export function useScrollReveal() {
-  const initialized = useRef(false)
-
   useEffect(() => {
-    if (initialized.current) return
-    initialized.current = true
-
     // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (prefersReducedMotion) {
@@ -25,32 +22,35 @@ export function useScrollReveal() {
       return
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Add stagger delays to children
-            const children = entry.target.querySelectorAll("[data-reveal-child]")
-            children.forEach((child, index) => {
-              ;(child as HTMLElement).style.transitionDelay = `${index * 80}ms`
-            })
+    if (!observer) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Add stagger delays to children
+              const children = entry.target.querySelectorAll("[data-reveal-child]")
+              children.forEach((child, index) => {
+                ;(child as HTMLElement).style.transitionDelay = `${index * 80}ms`
+              })
 
-            entry.target.classList.add("is-visible")
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -40px 0px",
-      }
-    )
+              entry.target.classList.add("is-visible")
+              if (observer) observer.unobserve(entry.target)
+            }
+          })
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -40px 0px",
+        }
+      )
+    }
 
     // Observe all [data-reveal] elements
+    // Using a singleton observer means observe() is a no-op for already observed elements
     document.querySelectorAll("[data-reveal]").forEach((el) => {
-      observer.observe(el)
+      observer?.observe(el)
     })
 
-    return () => observer.disconnect()
+    // We don't disconnect the singleton observer on unmount because other components still need it
   }, [])
 }

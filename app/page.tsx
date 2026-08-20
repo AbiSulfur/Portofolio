@@ -1,13 +1,14 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
 import ValueProposition from "@/components/value-proposition"
-import Services from "@/components/services"
-import Projects from "@/components/projects"
-import Trust from "@/components/trust"
-import About from "@/components/about"
-import Contact from "@/components/contact"
-import Footer from "@/components/footer"
+import dynamic from "next/dynamic"
 
+const Services = dynamic(() => import("@/components/services"))
+const Projects = dynamic(() => import("@/components/projects"))
+const Trust = dynamic(() => import("@/components/trust"))
+const About = dynamic(() => import("@/components/about"))
+const Contact = dynamic(() => import("@/components/contact"))
+const Footer = dynamic(() => import("@/components/footer"))
 export default function Home() {
   return (
     <main className="overflow-hidden">
