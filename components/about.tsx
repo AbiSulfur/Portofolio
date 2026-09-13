@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react"
 import { useLanguage } from "@/components/language-provider"
 import { useScrollReveal } from "@/hooks/useScrollReveal"
-import Image from "next/image"
 
 function useCountUp(targetValue: number, duration: number = 1500) {
   const [count, setCount] = useState(0)
@@ -31,12 +30,9 @@ function useCountUp(targetValue: number, duration: number = 1500) {
           const animate = (currentTime: number) => {
             const elapsed = currentTime - startTime
             const progress = Math.min(elapsed / duration, 1)
-            // Ease-out cubic
             const eased = 1 - Math.pow(1 - progress, 3)
             setCount(Math.round(eased * targetValue))
-            if (progress < 1) {
-              requestAnimationFrame(animate)
-            }
+            if (progress < 1) requestAnimationFrame(animate)
           }
           requestAnimationFrame(animate)
         }
@@ -68,53 +64,67 @@ export default function About() {
   ]
 
   return (
-    <section id="about" className="section-padding bg-card/30">
+    <section id="about" className="section-padding border-t border-border/10">
       <div className="max-w-5xl mx-auto">
-        <div className="mb-16 text-center md:text-left" data-reveal>
-          <h2 className="section-title mb-4">{t("about", "title")}</h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-accent via-accent/70 to-accent/30 rounded-full mx-auto md:mx-0"></div>
-          <p className="section-subtitle mt-6 max-w-2xl mx-auto md:mx-0">
-            {t("about", "subtitle")}
+
+        {/* Section label */}
+        <div className="mb-16" data-reveal>
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-3">
+            {t("about", "title")}
           </p>
+          <h2 className="section-title max-w-xl">{t("about", "title")}</h2>
         </div>
 
-        {/* Layout: Image + Content */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center" data-reveal>
-          
-          {/* Left Column - Profile Image */}
-          <div className="md:col-span-5 flex justify-center md:justify-start" data-reveal-child>
-            <div className="relative w-full max-w-sm aspect-[4/5] md:aspect-square lg:aspect-[3/4] overflow-hidden rounded-2xl glow-accent border border-border/30">
-              <Image 
-                src="/Abigail.webp" 
-                alt="Benedictus Abigail Triwiyatno" 
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
+        {/* Main layout: Stats top/left | Bio right */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 md:gap-16 items-start mb-12 sm:mb-16" data-reveal>
+
+          {/* Stats — 3-col row on mobile, vertical stack on desktop */}
+          <div className="md:col-span-4 grid grid-cols-3 md:grid-cols-1 gap-4 md:gap-10">
+            {stats.map((stat, idx) => (
+              <div
+                key={idx}
+                ref={stat.ref}
+                className="flex flex-col items-center md:items-start"
+                data-reveal-child
+              >
+                <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-accent leading-none tabular-nums">
+                  {stat.count}{stat.suffix}
+                </span>
+                <span className="text-[10px] sm:text-xs font-semibold text-foreground/50 uppercase tracking-widest mt-1 md:mt-2 text-center md:text-left">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
           </div>
 
-          {/* Right Column - Content */}
-          <div className="md:col-span-7 space-y-6 text-center md:text-left">
+          {/* Right column — bio + tech */}
+          <div className="md:col-span-8 space-y-6">
             <div className="space-y-4" data-reveal-child>
               <p className="text-lg md:text-xl text-foreground/90 leading-relaxed font-medium">
                 {t("about", "p1")}
               </p>
-              <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
+              <p className="text-base md:text-lg text-foreground/75 leading-relaxed">
                 {t("about", "p2")}
               </p>
-              <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
+              <p className="text-base md:text-lg text-foreground/75 leading-relaxed">
                 {t("about", "p3")}
               </p>
             </div>
 
-            {/* Tech Stack as pill tags */}
-            <div className="glass-card p-6 card-hover border border-border/20 hover:border-accent/40 bg-accent/5 max-w-xl mx-auto md:mx-0" data-reveal-child>
-              <h3 className="text-sm uppercase tracking-wider text-accent font-bold mb-3">{t("about", "techStack")}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{t("about", "techStackDesc")}</p>
-              <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+            {/* Tech stack */}
+            <div className="glass-card p-6 border border-border/20 hover:border-accent/40 bg-accent/5 transition-colors duration-300" data-reveal-child>
+              <h3 className="text-xs font-bold text-accent uppercase tracking-[0.2em] mb-1">
+                {t("about", "techStack")}
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                {t("about", "techStackDesc")}
+              </p>
+              <div className="flex flex-wrap gap-2">
                 {techStack.map((tech) => (
-                  <span key={tech} className="px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-md text-sm font-semibold text-foreground/80">
+                  <span
+                    key={tech}
+                    className="px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-md text-sm font-semibold text-foreground/80"
+                  >
                     {tech}
                   </span>
                 ))}
@@ -123,27 +133,10 @@ export default function About() {
           </div>
         </div>
 
-        {/* Stat Counters */}
-        <div className="grid grid-cols-3 gap-6 mt-16 pt-16 border-t border-border/30">
-          {stats.map((stat, idx) => (
-            <div
-              key={idx}
-              ref={stat.ref}
-              className="text-center"
-            >
-              <div className="text-4xl md:text-5xl font-extrabold text-accent mb-2">
-                {stat.count}{stat.suffix}
-              </div>
-              <p className="text-sm md:text-base text-muted-foreground font-medium">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 pt-8 border-t border-border/30" data-reveal>
-          <p className="text-lg md:text-xl text-foreground/90 leading-relaxed font-medium text-center md:text-left">
-            <span className="highlight">"{t("about", "closingText")}"</span>
+        {/* Closing quote */}
+        <div className="border-t border-border/20 pt-12" data-reveal>
+          <p className="text-xl md:text-2xl font-semibold text-foreground/80 leading-relaxed text-center italic">
+            <span className="text-accent not-italic font-bold">"{t("about", "closingText")}"</span>
           </p>
         </div>
       </div>

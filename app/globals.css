@@ -128,16 +128,16 @@
 /* Custom portfolio styles for smooth animations and typography */
 @layer components {
   .section-padding {
-    @apply px-6 py-20 md:px-12 md:py-32;
+    @apply px-5 py-14 sm:px-6 sm:py-20 md:px-12 md:py-32;
   }
 
-  /* Increased typography sizes for better hierarchy and clarity */
+  /* Responsive typography sizes */
   .section-title {
-    @apply text-5xl md:text-6xl font-bold text-balance leading-tight;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-balance leading-tight;
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-muted-foreground leading-relaxed;
+    @apply text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed;
   }
 
   .highlight {
@@ -343,4 +343,206 @@
 
 .scroll-animation:hover {
   animation-play-state: paused;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   KINETIC HERO — BACKGROUND BLOBS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@keyframes blob-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -30px) scale(1.05); }
+  66%       { transform: translate(-20px, 20px) scale(0.97); }
+}
+
+@keyframes blob-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-50px, 20px) scale(1.08); }
+  66%       { transform: translate(30px, -40px) scale(0.95); }
+}
+
+@keyframes blob-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(25px, 35px) scale(1.04); }
+}
+
+.hero-blob-a {
+  animation: blob-drift-a 18s ease-in-out infinite;
+}
+.hero-blob-b {
+  animation: blob-drift-b 22s ease-in-out infinite;
+}
+.hero-blob-c {
+  animation: blob-drift-c 14s ease-in-out infinite;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO DOT GRID PATTERN
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hero-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    oklch(0.55 0.18 250 / 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+}
+
+.dark .hero-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    oklch(0.55 0.18 250 / 0.08) 1px,
+    transparent 1px
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLL INDICATOR
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(6px); opacity: 1; }
+}
+
+.scroll-indicator {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EDITORIAL SERVICE LIST
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.service-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  align-items: start;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid oklch(0.9 0 0 / 0.5);
+  cursor: default;
+  transition: padding-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .service-row {
+    grid-template-columns: 3rem 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+  }
+}
+
+.dark .service-row {
+  border-bottom-color: oklch(0.2 0 0 / 0.6);
+}
+
+.service-row:first-child {
+  border-top: 1px solid oklch(0.9 0 0 / 0.5);
+}
+
+.dark .service-row:first-child {
+  border-top-color: oklch(0.2 0 0 / 0.6);
+}
+
+.service-row:hover {
+  padding-left: 1rem;
+}
+
+.service-arrow {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.service-row:hover .service-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EDITORIAL PROJECTS GRID
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.project-featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .project-featured-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HORIZONTAL PROCESS TIMELINE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.process-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+}
+
+.process-timeline::before {
+  content: "";
+  position: absolute;
+  top: 2rem;
+  left: calc(100% / 6);
+  right: calc(100% / 6);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    oklch(0.55 0.18 250 / 0.3),
+    oklch(0.55 0.18 250 / 0.6),
+    oklch(0.55 0.18 250 / 0.3)
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .process-timeline {
+    grid-template-columns: 1fr;
+  }
+  .process-timeline::before {
+    display: none;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MANIFESTO QUOTE MARK
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.manifesto-quote {
+  font-size: 5rem;
+  line-height: 0.6;
+  font-family: Georgia, serif;
+  color: oklch(0.55 0.18 250 / 0.2);
+  pointer-events: none;
+  user-select: none;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .manifesto-quote {
+    font-size: 8rem;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   REDUCED MOTION: disable new animations
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob-a,
+  .hero-blob-b,
+  .hero-blob-c {
+    animation: none;
+  }
+  .scroll-indicator {
+    animation: none;
+    opacity: 0.6;
+  }
+  .service-row {
+    transition: none;
+  }
+  .service-arrow {
+    transition: none;
+  }
 }

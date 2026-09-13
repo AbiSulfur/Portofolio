@@ -1,134 +1,122 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa"
+import { Github, Linkedin, Instagram, ChevronUp } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/components/language-provider"
-import { useScrollReveal } from "@/hooks/useScrollReveal"
 
 const currentYear = new Date().getFullYear()
 
 export default function Footer() {
   const { t } = useLanguage()
-  useScrollReveal()
-
   const [showBackToTop, setShowBackToTop] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 300)
-    }
+    const handleScroll = () => setShowBackToTop(window.scrollY > 300)
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" })
+
+  const navLinks = [
+    { label: t("nav", "about"), id: "about" },
+    { label: t("nav", "services"), id: "services" },
+    { label: t("nav", "projects"), id: "projects" },
+    { label: t("nav", "contact"), id: "contact" },
+  ]
+
+  const socialLinks = [
+    { name: "GitHub", url: "https://github.com/AbiSulfur", icon: <Github className="w-5 h-5" aria-hidden="true" /> },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/abigail-dev/", icon: <Linkedin className="w-5 h-5" aria-hidden="true" /> },
+    { name: "Instagram", url: "https://www.instagram.com/bened_tri/", icon: <Instagram className="w-5 h-5" aria-hidden="true" /> },
+  ]
 
   return (
     <>
-      <footer className="bg-card/30 border-t border-border/20 text-foreground/70 pt-20 pb-12 mt-20">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          
-          {/* Pre-Footer Final CTA (Moved to contact.tsx) */}
+      <footer className="border-t border-border/20 bg-card/20 pt-16 pb-10">
+        <div className="max-w-5xl mx-auto px-6 md:px-12">
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Top row: brand + nav */}
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-12">
             {/* Brand */}
-            <div>
-              <h3 className="text-lg font-bold text-foreground mb-2">
+            <div className="flex-shrink-0">
+              <h3 className="text-xl font-extrabold text-foreground mb-2 tracking-tight">
                 Abigail<span className="text-accent">.</span>
               </h3>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm text-foreground/50 max-w-xs leading-relaxed">
                 {t("footer", "description")}
               </p>
             </div>
 
-            {/* Quick Links */}
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-accent mb-4">{t("footer", "quickLinks")}</h4>
-              <ul className="space-y-2 text-sm">
-                {[
-                  { label: t("nav", "about"), id: "about" },
-                  { label: t("nav", "services"), id: "services" },
-                  { label: t("nav", "projects"), id: "projects" },
-                  { label: t("nav", "contact"), id: "contact" },
-                ].map((link) => (
-                  <li key={link.id}>
-                    <button
-                      onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" })}
-                      className="hover:text-accent transition-colors"
-                    >
-                      {link.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Nav + Social — 2-col grid on mobile */}
+            <div className="grid grid-cols-2 sm:flex sm:flex-row gap-8 sm:gap-10">
+              {/* Quick links */}
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                  {t("footer", "quickLinks")}
+                </h4>
+                <ul className="space-y-2">
+                  {navLinks.map((link) => (
+                    <li key={link.id}>
+                      <button
+                        onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" })}
+                        className="text-sm text-foreground/55 hover:text-accent transition-colors duration-200"
+                      >
+                        {link.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            {/* Social Links */}
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-accent mb-4">{t("footer", "connect")}</h4>
-              <div className="flex gap-4">
-                {[
-                  { name: "GitHub", url: "https://github.com/AbiSulfur", icon: FaGithub },
-                  { name: "LinkedIn", url: "https://www.linkedin.com/in/abigail-dev/", icon: FaLinkedin },
-                  { name: "Instagram", url: "https://www.instagram.com/bened_tri/", icon: FaInstagram },
-                ].map((social) => {
-                  const IconComponent = social.icon
-                  return (
+              {/* Social */}
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                  {t("footer", "connect")}
+                </h4>
+                <div className="flex flex-col gap-3">
+                  {socialLinks.map((social) => (
                     <a
                       key={social.name}
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-foreground/60 hover:text-accent hover:scale-110 transition-all duration-300"
-                      title={social.name}
                       aria-label={social.name}
+                      className="flex items-center gap-2 text-sm text-foreground/55 hover:text-accent transition-colors duration-200"
                     >
-                      <IconComponent size={20} aria-hidden="true" />
+                      {social.icon}
+                      {social.name}
                     </a>
-                  )
-                })}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="border-t border-border/20 pt-8">
-            {/* Bottom Info */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-foreground/60">
-              <p>© {currentYear} Benedictus Abigail Triwiyatno. {t("footer", "copyright")}</p>
-              <div className="flex gap-6">
-                <Link href="/privacy" className="hover:text-accent transition-colors">
-                  Privacy
-                </Link>
-                <Link href="/terms" className="hover:text-accent transition-colors">
-                  Terms
-                </Link>
-              </div>
-            </div>
-
-            {/* Building Info */}
-            <div className="mt-6 pt-6 border-t border-border/20 text-center text-xs text-foreground/50">
-              <p>
-                Built with <span className="text-accent">Next.js</span>, <span className="text-accent">Tailwind CSS</span>,{" "}
-                and <span className="text-accent">React</span>.
-              </p>
+          {/* Bottom row */}
+          <div className="border-t border-border/20 pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-foreground/40">
+            <p>© {currentYear} Benedictus Abigail Triwiyatno. {t("footer", "copyright")}</p>
+            <div className="flex items-center gap-5">
+              <Link href="/privacy" className="hover:text-accent transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-accent transition-colors">Terms</Link>
+              <span>
+                Built with{" "}
+                <span className="text-accent">Next.js</span> ·{" "}
+                <span className="text-accent">Tailwind</span>
+              </span>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Floating Back to Top Button */}
+      {/* Back to top */}
       <button
         onClick={scrollToTop}
         className={`back-to-top ${showBackToTop ? "is-visible" : ""}`}
         aria-label="Back to top"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
+        <ChevronUp className="w-5 h-5" aria-hidden="true" />
       </button>
     </>
   )
