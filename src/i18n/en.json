@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "process": "Process",
+    "contact": "Contact",
+    "available": "Available for work"
+  },
+  "hero": {
+    "headlineLine1": "Building",
+    "headlineLine2": "High-Converting",
+    "headlineLine3": "Web Experiences",
+    "subtitle": "Helping businesses establish a strong online presence through fast, responsive, and conversion-focused websites.",
+    "ctaPrimary": "Free Consultation",
+    "ctaSecondary": "View My Works",
+    "badge1": "Mobile Friendly",
+    "badge2": "Fast Loading",
+    "badge3": "Modern Design",
+    "scrollCue": "Scroll to explore"
+  },
+  "intro": {
+    "quote": "I don't just write code. I build digital solutions that help your business grow, solve practical problems, and look professional.",
+    "cta": "View My Works"
+  },
+  "services": {
+    "title": "My Services",
+    "subtitle": "Clear, reliable web development services tailored to your business goals.",
+    "service1Title": "Custom Landing Pages",
+    "service1Desc": "High-impact single pages optimized for conversions, ideal for marketing campaigns, SaaS launches, and product rollouts.",
+    "service2Title": "Corporate Profiles",
+    "service2Desc": "Professional company websites that establish credibility, communicate brand values, and turn visitors into qualified leads.",
+    "service3Title": "Web Applications",
+    "service3Desc": "Custom web apps and internal tools engineered to automate workflows, eliminate operational friction, and scale reliably."
+  },
+  "projects": {
+    "title": "My Works",
+    "subtitle": "A selection of projects built to help clients and businesses achieve measurable results.",
+    "viewCode": "View Code",
+    "liveDemo": "Live Demo",
+    "viewProject": "View Project",
+    "ctaText": "Interested in a website like this?",
+    "ctaButton": "Discuss Your Project"
+  },
+  "process": {
+    "title": "My Work Process",
+    "subtitle": "A structured, transparent approach to delivering quality web solutions from concept to launch.",
+    "step1Title": "Discovery & Strategy",
+    "step1Desc": "Understanding your business goals, target audience, and functional requirements to map an efficient roadmap.",
+    "step2Title": "Design & Development",
+    "step2Desc": "Translating strategy into clean, responsive layouts and robust code using modern technologies.",
+    "step3Title": "Testing & Launch",
+    "step3Desc": "Rigorous cross-device testing, performance audits, and seamless deployment with post-launch reliability."
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "A dedicated web developer focused on building functional, high-performance web products.",
+    "p1": "Hello, I am Abigail, a web developer based in Indonesia who specializes in creating functional, clean, and user-friendly web applications that solve practical business challenges.",
+    "p2": "I focus on understanding how software drives real business value. Whether crafting a focused landing page or building a full web application, my priority is shipping clean, maintainable code with solid UX.",
+    "p3": "I combine modern engineering practices with thoughtful design execution to deliver fast websites that help businesses establish credibility and convert traffic.",
+    "coreExpertise": "Core Expertise",
+    "coreExpertiseDesc": "Modern web technologies focused on speed and reliability.",
+    "closingQuote": "My goal is to become your long-term technical partner in growing your digital presence.",
+    "stat1Label": "Projects Showcase",
+    "stat2Label": "Years Experience"
+  },
+  "contact": {
+    "title": "Let's Work Together",
+    "subtitle": "Ready to build a website that delivers results? Reach out today for a consultation with no commitments.",
+    "ctaWhatsapp": "WhatsApp Me",
+    "ctaEmail": "Send Email",
+    "directContact": "Direct Contact",
+    "availability": "Available for freelance projects and agency partnerships.",
+    "location": "Jakarta, Indonesia"
+  },
+  "footer": {
+    "description": "Building high-converting digital experiences that help businesses grow.",
+    "quickLinks": "Quick Links",
+    "connect": "Connect",
+    "copyright": "All rights reserved.",
+    "builtWith": "Built with Astro & Tailwind CSS v4."
+  },
+  "legal": {
+    "backHome": "Back to Home",
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms & Conditions"
+  }
+}

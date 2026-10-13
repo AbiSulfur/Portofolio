@@ -1,0 +1,61 @@
+---
+import '../styles/globals.css';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Benedictus Abigail Triwiyatno | Freelance Web Developer Indonesia",
+  description = "Portfolio of Benedictus Abigail Triwiyatno, a professional freelance web developer in Indonesia specializing in high-converting B2B websites, SaaS landing pages, and custom web applications.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Freelance Web Developer Indonesia, B2B Web Apps, React Developer Jakarta, Next.js Developer Indonesia, Jasa Pembuatan Website Profesional, SaaS Landing Page" />
+    <meta name="author" content="Benedictus Abigail Triwiyatno" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://abigaildev.my.id/" />
+    <meta property="og:title" content="Benedictus Abigail Triwiyatno | Freelance Web Developer" />
+    <meta property="og:description" content="Professional web development services for businesses. Specializing in high-converting websites and modern web applications." />
+    <meta property="og:site_name" content="Abigail Dev Portfolio" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Benedictus Abigail Triwiyatno | Freelance Web Developer" />
+    <meta name="twitter:description" content="Professional web development services for businesses. Specializing in high-converting websites and modern web applications." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/Logo.png" />
+    <link rel="apple-touch-icon" href="/Logo.png" />
+
+    <!-- Astro View Transitions (ClientRouter) -->
+    <ClientRouter />
+
+    <!-- Self-hosted Font Preloads (DESIGN.md §4.3 & §9) -->
+    <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/dm-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  </head>
+  <body class="bg-bg text-ink font-display antialiased selection:bg-accent selection:text-ink">
+    <!-- Skip to Content landmark for Accessibility (WCAG 2.2 AA) -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-ink focus:text-bg focus:rounded-full focus:outline-none focus:ring-2 focus:ring-accent"
+    >
+      Skip to content
+    </a>
+
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "about": "Tentang",
+    "services": "Layanan",
+    "projects": "Karya",
+    "process": "Proses",
+    "contact": "Kontak",
+    "available": "Tersedia untuk proyek"
+  },
+  "hero": {
+    "headlineLine1": "Membangun",
+    "headlineLine2": "Website Profesional",
+    "headlineLine3": "Yang Menjual",
+    "subtitle": "Membantu bisnis membangun kehadiran online yang kuat melalui website modern, cepat, dan berfokus pada konversi.",
+    "ctaPrimary": "Konsultasi Gratis",
+    "ctaSecondary": "Lihat Karya Saya",
+    "badge1": "Mobile Friendly",
+    "badge2": "Fast Loading",
+    "badge3": "Modern Design",
+    "scrollCue": "Gulir untuk eksplorasi"
+  },
+  "intro": {
+    "quote": "Saya tidak hanya menulis kode. Saya membangun solusi digital yang membantu bisnis Anda tumbuh, menyelesaikan masalah nyata, dan terlihat profesional.",
+    "cta": "Lihat Karya Saya"
+  },
+  "services": {
+    "title": "Layanan Saya",
+    "subtitle": "Layanan pembuatan website profesional yang disesuaikan dengan target bisnis Anda.",
+    "service1Title": "Custom Landing Page",
+    "service1Desc": "Halaman tunggal yang optimal untuk konversi, sangat tepat untuk kampanye marketing, peluncuran SaaS, dan promosi produk.",
+    "service2Title": "Company Profile",
+    "service2Desc": "Website profil perusahaan profesional yang membangun kredibilitas, mengomunikasikan nilai brand, dan mendatangkan prospek klien.",
+    "service3Title": "Web Aplikasi",
+    "service3Desc": "Aplikasi web kustom dan sistem operasional internal untuk mengotomasi alur kerja, menghilangkan hambatan proses, dan siap berkembang."
+  },
+  "projects": {
+    "title": "Karya Saya",
+    "subtitle": "Pilihan proyek yang saya bangun untuk membantu klien dan bisnis mencapai hasil nyata.",
+    "viewCode": "Lihat Kode",
+    "liveDemo": "Lihat Website",
+    "viewProject": "Lihat Proyek",
+    "ctaText": "Tertarik membuat website profesional seperti ini?",
+    "ctaButton": "Diskusikan Proyek Anda"
+  },
+  "process": {
+    "title": "Proses Kerja Saya",
+    "subtitle": "Pendekatan terstruktur dan transparan untuk memberikan solusi digital berkualitas tinggi dari konsep hingga peluncuran.",
+    "step1Title": "Riset & Strategi",
+    "step1Desc": "Memahami tujuan bisnis Anda, target audiens, dan kebutuhan fungsional untuk menyusun rencana kerja yang efisien.",
+    "step2Title": "Desain & Pengembangan",
+    "step2Desc": "Mengubah strategi menjadi desain bersih yang responsif dan membangun kode handal dengan teknologi modern.",
+    "step3Title": "Pengujian & Peluncuran",
+    "step3Desc": "Pengujian menyeluruh di berbagai perangkat, audit performa, dan peluncuran lancar dengan dukungan purnajual."
+  },
+  "about": {
+    "title": "Tentang Saya",
+    "subtitle": "Web developer yang berdedikasi membangun produk web fungsional dan berkinerja tinggi.",
+    "p1": "Halo, saya Abigail, seorang web developer di Indonesia yang berfokus pada pembuatan aplikasi web fungsional, bersih, dan mudah digunakan untuk menyelesaikan tantangan bisnis praktis.",
+    "p2": "Saya berfokus memahami bagaimana perangkat lunak memberi nilai tambah nyata bagi bisnis. Baik membuat landing page sederhana maupun aplikasi web lengkap, prioritas saya adalah kode bersih yang mudah dirawat dan UX yang solid.",
+    "p3": "Saya menggabungkan praktik rekayasa modern dengan eksekusi desain yang matang untuk menghadirkan website cepat yang membantu bisnis membangun reputasi dan mengonversi pengunjung.",
+    "coreExpertise": "Keahlian Utama",
+    "coreExpertiseDesc": "Teknologi web modern yang berfokus pada kecepatan dan keandalan.",
+    "closingQuote": "Tujuan saya adalah menjadi mitra teknologi jangka panjang untuk mengembangkan kehadiran digital Anda.",
+    "stat1Label": "Proyek Unggulan",
+    "stat2Label": "Tahun Pengalaman"
+  },
+  "contact": {
+    "title": "Mari Bekerja Sama",
+    "subtitle": "Siap membangun website yang memberikan hasil nyata? Hubungi saya hari ini untuk konsultasi tanpa komitmen.",
+    "ctaWhatsapp": "WhatsApp Saya",
+    "ctaEmail": "Kirim Email",
+    "directContact": "Kontak Langsung",
+    "availability": "Terbuka untuk proyek freelance dan kerja sama agensi.",
+    "location": "Jakarta, Indonesia"
+  },
+  "footer": {
+    "description": "Membangun pengalaman digital yang meyakinkan untuk membantu bisnis terus bertumbuh.",
+    "quickLinks": "Tautan Cepat",
+    "connect": "Terhubung",
+    "copyright": "Hak Cipta Dilindungi.",
+    "builtWith": "Dibangun dengan Astro & Tailwind CSS v4."
+  },
+  "legal": {
+    "backHome": "Kembali ke Beranda",
+    "privacyTitle": "Kebijakan Privasi",
+    "termsTitle": "Syarat & Ketentuan"
+  }
+}
