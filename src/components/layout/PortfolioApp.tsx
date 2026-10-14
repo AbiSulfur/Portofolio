@@ -18,7 +18,7 @@ export default function PortfolioApp() {
       <LenisProvider>
         <CustomCursor />
         <Navbar />
-        <main id="main-content" tabIndex={-1} className="outline-none">
+        <main id="main-content" className="outline-none">
           <Hero />
           <Intro />
           <Services />

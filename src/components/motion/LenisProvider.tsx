@@ -24,6 +24,9 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       smoothWheel: true,
     });
     lenisRef.current = lenis;
+    if (typeof window !== "undefined") {
+      (window as any).__lenis = lenis;
+    }
 
     let reqId: number;
     function raf(time: number) {
