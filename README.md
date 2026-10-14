@@ -9,7 +9,7 @@
 
   <!-- Dynamic Animated Typing Banner -->
   <a href="https://abigaildev.my.id/">
-    <img src="https://readme-typing-svg.demolab.com?font=Bricolage+Grotesque&weight=700&size=24&duration=2800&pause=1100&color=C8FF3D&background=0B0B0C00&center=true&vCenter=true&width=760&lines=High-Craft+Portfolio+%26+Freelance+Web+Engineering;Anti-AI-Slop+Design+%2B+Framer-Grade+Interactions;Astro+v7+%2B+React+19+%2B+Tailwind+v4+%2B+Lenis;WCAG+2.2+AA+Compliant+%E2%80%A2+100%25+Performance+Audited;Engineered+for+High-Converting+B2B+%26+SaaS+Experiences" alt="Typing SVG Banner" />
+    <img src="https://readme-typing-svg.demolab.com?font=Bricolage+Grotesque&weight=700&size=24&duration=2800&pause=1100&color=C8FF3D&background=0B0B0C00&center=true&vCenter=true&width=760&lines=High-Craft+Portfolio+%26+Freelance+Web+Engineering;Bespoke+Editorial+Design+%2B+Framer-Grade+Interactions;Astro+v7+%2B+React+19+%2B+Tailwind+v4+%2B+Lenis;WCAG+2.2+AA+Compliant+%E2%80%A2+100%25+Performance+Audited;Engineered+for+High-Converting+B2B+%26+SaaS+Experiences" alt="Typing SVG Banner" />
   </a>
 
   <br/><br/>
@@ -21,7 +21,7 @@
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-v5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
   [![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://abigaildev.my.id/)
-  [![WCAG 2.2 AA](https://img.shields.io/badge/WCAG-2.2_AA_Compliant-2ea44f?style=for-the-badge&logo=w3c&logoColor=white)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+  [![WCAG 2.2 AA](https://img.shields.io/badge/WCAG-2.2_AA_Compliant-2ea44f?style=for-the-badge&logo=w3c&logoColor=white)](https://www.w3.org/TR/WCAG22/)
   [![Lighthouse](https://img.shields.io/badge/Lighthouse-100%25_Audit_Clean-success?style=for-the-badge&logo=lighthouse&logoColor=white)](https://abigaildev.my.id/)
 
   <br/>
@@ -33,7 +33,7 @@
   [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&labelColor=0B0B0C)](LICENSE)
 
   <p align="center">
-    <strong>Portofolio web modern dengan pendekatan anti-AI-slop design, layout editorial bergaya Framer, dan motion buttery-smooth berbasis Astro Islands Architecture.</strong>
+    <strong>Portofolio web modern dengan pendekatan bespoke high-craft design, layout editorial bergaya Framer, dan motion buttery-smooth berbasis Astro Islands Architecture.</strong>
   </p>
 
   <p align="center">
@@ -70,7 +70,7 @@ Dibangun melalui migrasi arsitektur dari Next.js ke **Astro v7 + React 19 + Tail
 - **📂 Pinned Services Folder Stack**: Tumpukan 3 kartu layanan interaktif (`[01]`, `[02]`, `[03]`) dengan tab spacing seragam (76px desktop, 56px mobile) yang mengunci rapi seperti map folder fisik saat discroll, dan keluar bersamaan sebagai satu kesatuan.
 - **🌐 Dual-Language Switcher (EN / ID)**: Pergantian bahasa instan (English dan Bahasa Indonesia) berbasis client-side context tanpa perlu reload halaman.
 - **🌊 Buttery-Smooth Motion (Lenis + Framer Motion)**: Scroll halus terakselerasi hardware dengan easing expo kustom, efek magnetic pada tombol CTA, dan interaksi kursor dinamis.
-- **🎨 Anti-AI-Slop Visual Identity**:
+- **🎨 Bespoke High-Craft Visual Identity**:
   - Palet warna 60-30-10 terkurasi: Warm Off-White (`#FAFAF7`), Deep Dark Ink (`#0B0B0C`), aksen disruptif Electric Lime (`#C8FF3D`), dan Tailored Blue (`#5B6BFF`).
   - Tipografi self-hosted tanpa font generik: *Bricolage Grotesque* untuk headline editorial dan *DM Mono* untuk aksen teknis.
 - **♿ Standar Aksesibilitas WCAG 2.2 AA**:
@@ -89,7 +89,7 @@ Portofolio ini mengkurasi sejumlah proyek pilihan dengan penekanan pada penyeles
 
 | Proyek & Stack | Kategori | Pratinjau Tampilan | Sorotan & Dampak Bisnis | Tautan |
 | :--- | :---: | :---: | :--- | :---: |
-| **AgriNusa**<br/>`Laravel 11`<br/>`Livewire 3`<br/>`Alpine.js`<br/>`Tailwind CSS`<br/>`MySQL` | **Full Stack** | <img src="public/Porto7.webp" width="320" alt="AgriNusa Preview" /> | Platform smart farming dan agribisnis terintegrasi dengan IoT, AI, dan P2P Lending Escrow untuk mengurangi risiko gagal panen dan memotong rantai distribusi yang merugikan. | [GitHub Repo](https://github.com/SukaMCD/Agrinusa) |
+| **AgriNusa**<br/>`Laravel 11`<br/>`Livewire 3`<br/>`Alpine.js`<br/>`Tailwind CSS`<br/>`MySQL` | **Full Stack** | <img src="public/Porto7.webp" width="320" alt="AgriNusa Preview" /> | Platform smart farming dan agribisnis terintegrasi dengan IoT, analitik data presisi, dan P2P Lending Escrow untuk mengurangi risiko gagal panen dan memotong rantai distribusi yang merugikan. | [GitHub Repo](https://github.com/SukaMCD/Agrinusa) |
 | **Aethel**<br/>`HTML5`<br/>`Vanilla CSS3`<br/>`Vanilla JS` | **Frontend** | <img src="public/Porto8.webp" width="320" alt="Aethel Preview" /> | Situs profil perusahaan futuristik yang memecahkan masalah kesenjangan kredibilitas digital agensi teknologi, menerapkan Human-First Engineering untuk meminimalisir hambatan kognitif. | [Live Demo](https://abigaildev.vercel.app/)<br/>•<br/>[GitHub Repo](https://github.com/AbiSulfur/Aethel) |
 | **Stockwise SaaS**<br/>`Tailwind CSS`<br/>`JavaScript`<br/>`HTML5` | **Frontend** | <img src="public/Porto5.webp" width="320" alt="Stockwise Preview" /> | Landing page SaaS profesional yang cepat dan optimal untuk SEO, dirancang khusus untuk mengumpulkan pendaftaran awal sebelum peluncuran resmi produk. | [GitHub Repo](https://github.com/AbiSulfur/Stockwise) |
 | **Leafly Tea**<br/>`PHP`<br/>`MySQL`<br/>`JavaScript`<br/>`Bootstrap` | **Full Stack** | <img src="public/Porto2.webp" width="320" alt="Leafly Tea Preview" /> | Sistem e-commerce terintegrasi yang mendigitalisasi proses penjualan tradisional untuk menekan biaya operasional dan membuka saluran pendapatan ritel 24/7. | [Live Demo](https://leaflytea.com)<br/>•<br/>[GitHub Repo](https://github.com/AbiSulfur/LeaflyTea) |
